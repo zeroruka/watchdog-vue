@@ -1,0 +1,35 @@
+@import './base.css';
+
+#app {
+    height: 100%;
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+a,
+.green {
+    text-decoration: none;
+    color: hsla(160, 100%, 37%, 1);
+    transition: 0.4s;
+}
+
+@media (hover: hover) {
+    a:hover {
+        background-color: hsla(160, 100%, 37%, 0.2);
+    }
+}
+
+@media {
+    body {
+        height: 100dvh;
+    }
+
+    #app {
+        place-items: center;
+        overflow: hidden;
+    }
+}
+
+
