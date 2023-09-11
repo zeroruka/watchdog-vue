@@ -1,46 +1,46 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import { useAuthStore } from "@/stores/auth";
-import piniaPluginPersistedState from "pinia-plugin-persistedstate";
+import { useAuthStore } from '@/stores/auth'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import axios from 'axios'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedState from 'pinia-plugin-persistedstate'
+import { createApp } from 'vue'
 
-import App from "./App.vue";
-import router from "./router";
+import App from './App.vue'
+import router from './router'
 
-import "./assets/main.css";
+import './assets/main.css'
 
-library.add(fas);
+library.add(fas)
 
-const app = createApp(App);
+const app = createApp(App)
 
-app.component("font-awesome-icon", FontAwesomeIcon);
+app.component('font-awesome-icon', FontAwesomeIcon)
 
-const pinia = createPinia();
-pinia.use(piniaPluginPersistedState);
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedState)
 
-app.use(pinia);
-app.use(router);
+app.use(pinia)
+app.use(router)
 
-const store = useAuthStore();
+const store = useAuthStore()
 
 export const HTTP = axios.create({
-  baseURL: `https://watchdog.zeroruka.moe/api/`
-});
+  baseURL: `https://watchdog-api.zeroruka.moe/v1/`
+})
 
 HTTP.interceptors.request.use(
   (config) => {
-    const token = store.token;
+    const token = store.token
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`
     }
-    return config;
+    return config
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
-app.mount("#app");
+app.mount('#app')
